@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Andale';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/ANDALEMO.woff');
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicBold';
+    src: url('@/assets/fonts/FuturaCyrillicBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicBook';
+    src: url('@/assets/fonts/FuturaCyrillicBook.ttf') format('truetype');
+    font-weight: normal; /* Ou ajuster selon le poids réel */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicDemi';
+    src: url('@/assets/fonts/FuturaCyrillicDemi.ttf') format('truetype');
+    font-weight: 500; /* Poids normal ou ajuster si nécessaire */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicExtraBold';
+    src: url('@/assets/fonts/FuturaCyrillicExtraBold.ttf') format('truetype');
+    font-weight: 800; /* Poids normal ou ajuster si nécessaire */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicHeavy';
+    src: url('@/assets/fonts/FuturaCyrillicHeavy.ttf') format('truetype');
+    font-weight: 900; /* Poids normal ou ajuster si nécessaire */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicLight';
+    src: url('@/assets/fonts/FuturaCyrillicLight.ttf') format('truetype');
+    font-weight: 300; /* Poids normal ou ajuster si nécessaire */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FuturaCyrillicMedium';
+    src: url('@/assets/fonts/FuturaCyrillicMedium.ttf') format('truetype');
+    font-weight: 500; /* Poids normal ou ajuster si nécessaire */
+    font-style: normal;
+}
+
+  :root {
+    --colorbgGradientRouge: linear-gradient(180deg, #E03122 0%, #7A1B13 100%);
+    --colorbgBlanc: #ffffff;
+    --colorbgNoir: #000000;
+    --colorbgJaune: #F2E438;
+    --colorbgGradientJaune: linear-gradient(180deg, #F2E438 0%, #ADA213 100%);
+    --colorbgMarin: #67C0BB;
+    --colorbgMarinFonce: #4DA4A6;
+    --colorbgGray: #B5B2B2;
+    --colorbgRouge: #E03122;
+    --colorbgTransparent: transparent;
+    --textcolorBlanc: #ffffff;
+    --textcolorRouge: #E03122;
+    --textcolorNoir: #000000;
+    --borderNone: none;
+    --borderRouge: 1px solid #E03122;
+    --fontFamilyImpact: impact;
+    --fontFamilyAndale: "Andale";
+    --fontFamily: 'Andale';
+    --fontWeight: normal;
+    --fontStyle: normal;
+    --fontFamilyMention: 'FuturaCyrillicLight';
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+}
