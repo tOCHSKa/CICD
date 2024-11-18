@@ -6,12 +6,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: [
     'nuxt-icon',
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    }
+    '~/modules/vuetify',
   ],
   build: {
     transpile: ['vuetify'],
@@ -23,4 +18,5 @@ export default defineNuxtConfig({
       },
     },
   },
-})
+});
+
