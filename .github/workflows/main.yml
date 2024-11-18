@@ -17,39 +17,64 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
-      # 3. Install dependencies
-      - name: Install dependencies
+      # 3. Install backend dependencies
+      - name: Install backend dependencies
         run: |
           cd back
           npm install
+        continue-on-error: false  # Ce paramètre garantit que l'échec de l'installation arrêtera le pipeline.
 
       # 4. Set NODE_ENV to production
       - name: Set NODE_ENV to production
         run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
       # 5. Configure environment variables
-      - name: Configure database environment variables
+      - name: Configure environment variables
         run: |
-          # Variables FTP et SSH
           echo "FTP_USERNAME=${{ secrets.FTP_USERNAME }}" >> $GITHUB_ENV
           echo "FTP_PASSWORD=${{ secrets.FTP_PASSWORD }}" >> $GITHUB_ENV
           echo "SERVER_HOST=${{ secrets.SERVER_HOST }}" >> $GITHUB_ENV
           echo "SERVER_USERNAME=${{ secrets.SERVER_USERNAME }}" >> $GITHUB_ENV
           echo "SERVER_PASSWORD=${{ secrets.SERVER_PASSWORD }}" >> $GITHUB_ENV
-
-          # Variables de la base de données
           echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
           echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
           echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+      # 6. Configure API URL
+      - name: Configure API URL
+        run: echo "NUXT_PUBLIC_API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
 
-      # 7. Build frontend
-      - name: Build front
+      # 7. Install frontend dependencies
+      - name: Install frontend dependencies
         run: |
           cd front
           npm install
-          npm run build
+        continue-on-error: false  # Arrête le pipeline en cas d'échec de l'installation frontend.
 
+      # 8. Build frontend
+      - name: Build frontend
+        run: |
+          cd front
+          npm run build
+        continue-on-error: false  # Ce paramètre garantit que l'échec de la build frontend arrêtera le pipeline.
+
+      # 9. Move frontend build to backend
+      - name: Move frontend build to backend
+        run: |
+          mkdir -p back/public
+          mv front/.nuxt back/public
+          cd back
+          node server.js
+        continue-on-error: false 
+
+      # 10. Deploy backend and frontend to FTP
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
