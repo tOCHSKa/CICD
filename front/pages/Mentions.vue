@@ -6,7 +6,7 @@
       <h2>Mentions Légales</h2>
   
       <h3>1. Éditeur du site</h3>
-      <p>
+
         Le présent site internet Chills est édité par :
         <ul>
           <li>Nom de l'entreprise : Chillsenterprise</li>
@@ -19,17 +19,16 @@
           <li>Email de contact : Fredkrueger@gmail.com</li>
           <li>Numéro de téléphone : 010102030405</li>
         </ul>
-      </p>
   
       <h3>2. Hébergement</h3>
-      <p>
+
         Le site internet est hébergé par :
         <ul>
           <li>Nom de l'hébergeur : Ionos</li>
           <li>Adresse de l'hébergeur : 12 rue de Paris, 75000 Paris</li>
           <li>Numéro de téléphone de l'hébergeur : 0103050408</li>
         </ul>
-      </p>
+
   
       <h3>3. Propriété intellectuelle</h3>
       <p>

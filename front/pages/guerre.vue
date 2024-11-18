@@ -48,7 +48,7 @@ const apiUrl = process.env.API_URL
 const fetchThrillerGenres = async () => {
     try {
 
-        const response = await fetch(`${apiUrl}/api/search/genre/War`');
+        const response = await fetch(`${apiUrl}/api/search/genre/War`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         thrillers.value = data.results ? data.results.slice(0, 27) : [];

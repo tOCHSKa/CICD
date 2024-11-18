@@ -48,9 +48,10 @@ const thrillerFilms = ref([]);
 const goTofilm = (imdb_id) => {
     router.push(`/pageFilm/${imdb_id}`)
 }
-const apiUrl = process.env.API_URL
+const apiUrl = process.env.API_URL;
 
 const fetchHorrorGenres = async () => {
+    const config = useRuntimeConfig(); // Récupérer la configuration runtime
     try {
         const response = await fetch(`${apiUrl}/api/search/genre/Horror`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
