@@ -67,6 +67,9 @@ jobs:
           mkdir -p back/public
           mv front/.nuxt back/public
           cd back
+          echo "PORT=3000" >> $GITHUB_ENV
+          echo "PROD_PORT=80" >> $GITHUB_ENV
+          env | grep PORT
           node server.js
         continue-on-error: false 
 
