@@ -10,9 +10,10 @@
             </div>
             <div class="passwordInput">
                 <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
-                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe" ref="passwordInput" v-model="mdp">
+                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe"
+                    ref="passwordInput" v-model="mdp">
                 <button type="button" class="iconMdp" @click="togglePassword">
-                    <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30"/>
+                    <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30" />
                 </button>
             </div>
             <div class="mdp">
@@ -38,8 +39,8 @@
 
             <div>
                 <p class="textRegister">Vous n'avez pas de compte ?</p>
-                <BoutonText 
-                    class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
+                <BoutonText class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
+                    borderSolid="var(--borderRouge)">
                     <NuxtLink to="/Register">Créer un compte</NuxtLink>
                 </BoutonText>
             </div>
@@ -64,13 +65,14 @@ const errorMessage = ref('');
 
 const togglePassword = () => {
     isPasswordVisible.value = !isPasswordVisible.value;
-    
+
     nextTick(() => {
         const input = passwordInput.value;
         input.focus();
         input.setSelectionRange(mdp.value.length, mdp.value.length);
     });
 };
+const apiUrl = process.env.API_URL
 
 const login = async () => {
     errorMessage.value = '';
@@ -86,7 +88,7 @@ const login = async () => {
             mdp: mdp.value,
         };
 
-        const data = await $fetch('http://localhost:3001/api/users/login', {
+        const data = await $fetch(`${apiUrl}/api/users/login`, {
             method: 'POST',
             body,
         });
@@ -111,6 +113,7 @@ const login = async () => {
     background-color: black;
     height: 100vh;
 }
+
 .titre {
     color: white;
     font-family: var(--fontFamilyImpact);
@@ -146,9 +149,11 @@ const login = async () => {
     font-family: var(--fontFamilyAndale);
     text-align: center;
 }
+
 .input:focus {
     outline: 1px solid white;
 }
+
 .input::placeholder {
     text-align: center;
     font-family: var(--fontFamilyAndale);
@@ -160,6 +165,7 @@ const login = async () => {
 .passwordInput {
     position: relative;
 }
+
 .iconMdp {
     position: absolute;
     color: white;
@@ -184,6 +190,7 @@ const login = async () => {
     margin-top: 10px;
     width: 300px;
 }
+
 .content {
     display: flex;
     align-items: center;
@@ -191,11 +198,13 @@ const login = async () => {
     cursor: pointer;
     font-size: 22px;
 }
+
 .content input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
+
 .checkmark {
     position: relative;
     height: 15px;
@@ -205,17 +214,21 @@ const login = async () => {
     border-radius: 5px;
     margin-right: 10px;
 }
+
 .content input:checked~.checkmark {
     background-color: #ee3902;
 }
+
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
+
 .content input:checked~.checkmark:after {
     display: block;
 }
+
 .content .checkmark:after {
     left: 5px;
     top: 2px;
@@ -247,10 +260,12 @@ const login = async () => {
     gap: 10px;
     margin-top: 15px;
 }
+
 .googleLogo {
     width: 23px;
     height: 23px;
 }
+
 .textGoogle {
     color: white;
     opacity: 0.9;
@@ -264,10 +279,12 @@ const login = async () => {
     text-align: center;
     font-family: var(--fontFamilyAndale);
 }
+
 .boutonRegister {
     width: 330px;
     height: 60px;
 }
+
 .boutonRegister a {
     text-decoration: none;
     color: inherit;
@@ -278,28 +295,28 @@ const login = async () => {
 
 
 // const login = async () => {
-    //     try {
-    //         const body = {
-    //             username: username.value,
-    //             mdp: mdp.value
-    //         }
-    //         const response = await fetch('/api/login', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(body)
-    //         })
-    
-    //         if (!response.ok) {
-    //             throw new Error ('Login échoué')
-    //         }
-    
-    //         const data = await response.json()
-    
-    //         router.push('/2fa')
-    
-    //     } catch (error) {
-    //         console.error("Erreur lors de la connexion: ", error)
-    //     }
-    // }
+// try {
+// const body = {
+// username: username.value,
+// mdp: mdp.value
+// }
+// const response = await fetch('/api/login', {
+// method: 'POST',
+// headers: {
+// 'Content-Type': 'application/json'
+// },
+// body: JSON.stringify(body)
+// })
+
+// if (!response.ok) {
+// throw new Error ('Login échoué')
+// }
+
+// const data = await response.json()
+
+// router.push('/2fa')
+
+// } catch (error) {
+// console.error("Erreur lors de la connexion: ", error)
+// }
+// }

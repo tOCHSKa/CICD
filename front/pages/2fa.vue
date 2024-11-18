@@ -34,6 +34,7 @@ const router = useRouter()
 const code = ref('')
 const username = ref('')
 
+const apiUrl = process.env.API_URL
 
 const fa2 = async () => {
     try {
@@ -43,12 +44,12 @@ const fa2 = async () => {
         };
         const token = localStorage.getItem('token')
 
-        const data = await $fetch('http://localhost:3001/api/users/verify-2fa', {
+        const data = await $fetch(`${apiUrl}/api/users/verify-2fa`, {
             method: 'POST',
             body,
             headers: { Authorization: `Bearer ${token}` }
         })
-        
+
         if (data && data.token) {
             localStorage.setItem('jwtToken', data.token);
             router.push(`/profil/${data.userId}`)

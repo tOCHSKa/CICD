@@ -44,10 +44,11 @@ const router = useRouter()
 const goToFilm = (imdb_id) => {
     router.push(`/pageFilm/${imdb_id}`)
 }
+const apiUrl = process.env.API_URL
 
 const fetchThrillerGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/genre/War');
+        const response = await fetch(`${apiUrl}/api/search/genre/War`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         thrillers.value = data.results ? data.results.slice(0, 30) : [];
@@ -58,7 +59,7 @@ const fetchThrillerGenres = async () => {
 
 const fetchThrillerFilmDetails = async () => {
     const filmPromises = thrillers.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
+        fetch(`${apiUrl}/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
     );
 
     try {

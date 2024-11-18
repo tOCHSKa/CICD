@@ -93,7 +93,7 @@ const togglePassword = () => {
     })
 }
 
-
+const apiUrl = process.env.API_URL
 
 const register = async () => {
     try {
@@ -106,7 +106,8 @@ const register = async () => {
             mdp: mdp.value,
         };
 
-        const data = await $fetch('http://localhost:3001/api/users/register', {
+
+        const data = await $fetch(`${apiUrl}/api/users/register`, {
             method: 'POST',
             body,
         });

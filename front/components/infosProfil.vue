@@ -95,11 +95,11 @@ const togglePasswordNew = () => {
 
 }
 
-
+const apiUrl = process.env.API_URL
 
 const fetchUserProfile = async (userId) => {
     try {
-        const data = await $fetch(`http://localhost:3001/api/users/profile/${userId}`, {
+        const data = await $fetch(`${apiUrl}/api/users/profile/${userId}`, {
             method: 'GET'
         })
         username.value = data.username
@@ -115,7 +115,7 @@ const fetchUserProfile = async (userId) => {
 const modifyProfil = async () => {
     const userId = route.params.id
     try {
-        const data = await $fetch(`http://localhost:3001/api/users/profile/${userId}`, {
+        const data = await $fetch(`${apiUrl}L/api/users/profile/${userId}`, {
             method: 'PUT',
             body: { username: username.value, email: email.value }
         })
@@ -128,7 +128,7 @@ const modifyProfil = async () => {
 
 const modifyMdp = async (userId) => {
     try {
-        const data = await $fetch(`http://localhost:3001/api/users/profile/mdp/${userId}`, {
+        const data = await $fetch(`${apiUrl}/api/users/profile/mdp/${userId}`, {
             method: 'PUT'
         })
     } catch (error) {
@@ -140,7 +140,7 @@ const modifyMdp = async (userId) => {
 
 const deleteCompte = async (userId) => {
     try {
-        const data = await $fetch(`http://localhost:3001/api/users/profile/supprimerCompte/${userId}`, {
+        const data = await $fetch(`${apiUrl}/api/users/profile/supprimerCompte/${userId}`, {
             method: 'DELETE'
         })
         router.push('/')

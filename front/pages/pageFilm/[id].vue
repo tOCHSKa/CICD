@@ -112,11 +112,11 @@ const toggleActeur = () => {
     isVsibleActeur.value = !isVsibleActeur.value
 }
 
-
+const apiUrl = process.env.API_URL
 
 const fetchActor = async () => {
     try {
-        const response = await fetch(`http://localhost:3001/api/search/castInfoByMovie/${route.params.id}`);
+        const response = await fetch(`${apiUrl}/api/search/castInfoByMovie/${route.params.id}`);
         const data = await response.json();
 
         const sixActeurs = data.cast.slice(0, 6)
@@ -130,7 +130,7 @@ const fetchActor = async () => {
 
 const fetchFilm = async () => {
     try {
-        const response = await fetch(`http://localhost:3001/api/search/film/idFilm/${route.params.id}`);
+        const response = await fetch(`${apiUrl}/api/search/film/idFilm/${route.params.id}`);
         const data = await response.json();
         selectedFilm.value = data.results;
     } catch (error) {
@@ -141,7 +141,7 @@ const fetchFilm = async () => {
 
 const fetchHorrorGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/genre/Horror');
+        const response = await fetch(`${apiUrl}/api/search/genre/Horror`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         horrors.value = data.results ? data.results.slice(0, 11) : [];
@@ -151,7 +151,7 @@ const fetchHorrorGenres = async () => {
 };
 const fetchFilmDetails = async () => {
     const filmPromises = horrors.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
+        fetch(`${apiUrl}/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
     )
 
     try {
@@ -170,7 +170,7 @@ const fetchFilmDetails = async () => {
 //       mdp: mdp.value,
 //     }
 
-//     const data = await $fetch(`http://localhost:3001/api/users/favoris/${route.params.id}`, {
+//     const data = await $fetch(`${apiUrl}/api/users/favoris/${route.params.id}`, {
 //       method: 'POST',
 //       body,
 //     })
@@ -399,6 +399,7 @@ onMounted(async () => {
     margin-top: 5px;
     margin-right: 5px;
 }
+
 .infoEtCoeur {
     display: block;
 }
@@ -415,6 +416,7 @@ onMounted(async () => {
     margin-bottom: 85px;
     z-index: 10;
 }
+
 .redCoeur {
     color: red;
 }

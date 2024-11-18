@@ -13,11 +13,11 @@ const route = useRoute()
 const favoris = ref([])
 const horrorFilms = ref([])
 
-
+const apiUrl = process.env.API_URL
 
 const favorisId = async () => {
   try {
-    const data = await $fetch(`http://localhost:3001/api/users/favorisTout/${route.params.id}`, {
+    const data = await $fetch(`${apiUrl}/api/users/favorisTout/${route.params.id}`, {
       method: 'GET'
     })
     favoris.value = data.favoris
@@ -31,7 +31,7 @@ const favorisId = async () => {
 
 const fetchFilmDetails = async () => {
   const filmPromises = favoris.value.map(film =>
-    fetch(`http://localhost:3001/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
+    fetch(`${apiUrl}/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
   )
 
   try {

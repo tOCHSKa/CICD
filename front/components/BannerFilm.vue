@@ -43,7 +43,8 @@ const goToFilm = (imdb_id) => {
 
 const fetchRecommendedFilm = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/film/idFilm/tt1029234');
+        const apiUrl = process.env.API_URL
+        const response = await fetch(`${apiUrl}/api/search/film/idFilm/tt1029234`);
         if (!response.ok) throw new Error('Erreur lors de la récupération du film');
         const data = await response.json();
         film.value = data.results;
@@ -123,13 +124,14 @@ await fetchRecommendedFilm();
     padding: 10px 4px;
     width: 100%;
 }
+
 @media screen and (min-width: 1000px) {
     .item2-desc {
         font-size: 20px;
     }
+
     .item2-title {
         font-size: 30px;
     }
 }
-
 </style>

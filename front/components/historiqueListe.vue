@@ -13,11 +13,11 @@ const route = useRoute()
 const historique = ref([])
 const horrorFilms = ref([])
 
-
+const apiUrl = process.env.API_URL
 
 const historiqueId = async () => {
   try {
-    const data = await $fetch(`http://localhost:3001/api/users/historiqueTout/${route.params.id}`, {
+    const data = await $fetch(`${apiUrl}/api/users/historiqueTout/${route.params.id}`, {
       method: 'GET'
     })
     historique.value = data.historique
@@ -31,7 +31,7 @@ const historiqueId = async () => {
 
 const fetchFilmDetails = async () => {
   const filmPromises = historique.value.map(film =>
-    fetch(`http://localhost:3001/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
+    fetch(`${apiUrl}/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
   )
 
   try {

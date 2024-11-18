@@ -114,7 +114,7 @@ const imdbIds = ref([]); // Pour stocker uniquement les IMDb IDs
 const filmDetails = ref([]); // Pour stocker les détails des films
 
 const genre = ref(['War', 'Mystery', 'Horror', 'Crime', 'Sci-Fi', 'Thriller']);
-
+const apiUrl = process.env.API_URL
 const openMenu = () => {
   isClosed.value = !isClosed.value
 
@@ -162,7 +162,7 @@ const searchFilm = async () => {
 
 const fetchFilmByTitle = async (title) => {
   try {
-    const response = await fetch(`http://localhost:3001/api/search/film/${title}`);
+    const response = await fetch(`${apiUrl}/api/search/film/${title}`);
     if (!response.ok) throw new Error(`Erreur lors de la récupération du film ${title}`);
 
     const data = await response.json();
@@ -182,7 +182,7 @@ const fetchFilmDetails = async (imdbIdsArray) => {
 
   const fetchFilm = async (imdb_id) => {
     try {
-      const responseFromApi = await fetch(`http://localhost:3001/api/search/film/idFilm/${imdb_id}`);
+      const responseFromApi = await fetch(`${apiUrl}/api/search/film/idFilm/${imdb_id}`);
       if (!responseFromApi.ok) throw new Error(`Erreur lors de la récupération du film avec l'ID ${imdb_id}`);
       const dataFromApi = await responseFromApi.json();
       filmDetails.value.push(dataFromApi); // Ajoute les détails à filmDetails
@@ -280,6 +280,7 @@ const directionFilm = (imdb_id) => {
   width: 100%;
   max-width: 300px;
 }
+
 .navAlignement a {
   text-decoration: none;
   color: white;
@@ -289,10 +290,12 @@ const directionFilm = (imdb_id) => {
   text-align: left;
   padding-left: 10px;
 }
+
 @media screen and (min-width: 1000px) {
   .navAlignement {
     align-items: center;
   }
+
   .navAlignement a {
     font-size: 30px;
   }
@@ -341,6 +344,7 @@ const directionFilm = (imdb_id) => {
 .search-bar input::placeholder {
   color: #aaa;
 }
+
 @media screen and (min-width: 1000px) {
   .search-bar input {
     width: 800px;

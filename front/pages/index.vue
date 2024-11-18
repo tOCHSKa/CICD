@@ -48,10 +48,11 @@ const thrillerFilms = ref([]);
 const goTofilm = (imdb_id) => {
     router.push(`/pageFilm/${imdb_id}`)
 }
+const apiUrl = process.env.API_URL
 
 const fetchHorrorGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/genre/Horror');
+        const response = await fetch(`${apiUrl}/api/search/genre/Horror`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         horrors.value = data.results ? data.results.slice(0, 11) : [];
@@ -62,7 +63,7 @@ const fetchHorrorGenres = async () => {
 
 const fetchFilmDetails = async () => {
     const filmPromises = horrors.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
+        fetch(`${apiUrl}/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
     );
 
     try {
@@ -76,7 +77,7 @@ const fetchFilmDetails = async () => {
 
 const fetchThrillerGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/genre/Thriller');
+        const response = await fetch(`${apiUrl}/api/search/genre/Thriller`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         thrillers.value = data.results ? data.results.slice(0, 11) : [];
@@ -87,7 +88,7 @@ const fetchThrillerGenres = async () => {
 
 const fetchThrillerFilmDetails = async () => {
     const filmPromises = thrillers.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
+        fetch(`${apiUrl}/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
     );
 
     try {
@@ -104,7 +105,7 @@ const cultesFilms = ref([]);
 
 const fetchCultesGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/filmbyrating');
+        const response = await fetch(`${apiUrl}/api/search/filmbyrating`);
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
         cultes.value = data.results ? data.results.slice(1, 11) : [];
@@ -115,7 +116,7 @@ const fetchCultesGenres = async () => {
 
 const fetchCultesFilmDetails = async () => {
     const filmPromises = cultes.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
+        fetch(`${apiUrl}/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
     );
 
     try {

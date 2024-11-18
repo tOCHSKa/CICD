@@ -35,12 +35,13 @@ const personnalInfo = ref([])
 const actorName = 'oscar isaac';
 const idActeur = ref('');
 
+const apiUrl = process.env.API_URL
 
 const fetchActorInfo = async () => {
     const encodedName = encodeURIComponent(actorName);
 
     try {
-        const response = await fetch(`http://localhost:3001/api/search/filmbyactorname/${encodedName}`);
+        const response = await fetch(`${apiUrl}`/api/search/filmbyactorname/`${encodedName}`);
 
         // Vérifie si la réponse est correcte
         if (!response.ok) throw new Error('Erreur lors de la récupération des données');
@@ -60,7 +61,7 @@ const fetchActorInfo = async () => {
         console.log('ID de l\'acteur:', idActeur.value); // Affiche l'ID de l'acteur
 
         try {
-            const response = await fetch(`http://localhost:3001/api/search/filmbyactorname/id/${idActeur.value}`)
+            const response = await fetch(`${apiUrl}/api/search/filmbyactorname/id/${idActeur.value}`)
             // Vérifie si la réponse est correcte
             if (!response.ok) throw new Error('Erreur lors de la récupération des données');
 
