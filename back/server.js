@@ -73,7 +73,7 @@ app.use('/api/search/castInfoByMovie', actorCast)
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const port = 3000;
+const port = isProduction ? process.env.PROD_PORT || 80 : process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
